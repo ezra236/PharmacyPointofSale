@@ -1,0 +1,80 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+class Pharmacy {
+private:
+    double total;
+
+public:
+    Pharmacy() : total(0) {}
+
+    void processOrder(const string& productName, double productPrice) {
+        cout << "Adding " << productName << " to the order. Price: $" << productPrice << endl;
+        total += productPrice;
+    }
+
+    void printReceipt() {
+        ofstream file("receipt.txt");
+        if (file.is_open()) {
+            file << "------ Receipt ------" << endl;
+            file << "Product\t\tPrice" << endl;
+            file << "---------------------" << endl;
+            file << "Total:\t\t$" << total << endl;
+            file.close();
+
+            cout << "Receipt has been stored in receipt.txt" << endl;
+        } else {
+            cout << "Unable to create the receipt file." << endl;
+        }
+    }
+    
+    
+     void printtheReceipt() {
+        cout << "------ Receipt ------" << endl;
+        cout << "Product\t\tPrice" << endl;
+
+        cout << "---------------------" << endl;
+        cout << "Total:\t\t$" << total << endl;
+    }
+};
+
+int main() {
+    Pharmacy pharmacy;
+    string productName;
+
+    cout << "Welcome to the Pharmacy!" << endl;
+
+    cout << "Enter the name of the product (or 'done' to finish): ";
+    cin >> productName;
+
+    while (productName != "done") {
+        double productPrice = 0;
+
+        if (productName == "ventrolin") {
+            productPrice = 2.0;
+        } else if (productName == "Lucozade") {
+            productPrice = 3.0;
+        } else if (productName == "p-Alaxin") {
+            productPrice = 1.5;
+        } else if (productName == "paracetamol") {
+            productPrice = 1.0;
+        } else {
+            cout << "Invalid product name. Please try again." << endl;
+        }
+
+        if (productPrice > 0) {
+            pharmacy.processOrder(productName, productPrice);
+        }
+
+        cout << "Enter the name of the product (or 'done' to finish): ";
+        cin >> productName;
+    }
+
+    pharmacy.printReceipt();
+    pharmacy.printtheReceipt();
+
+    return 0;
+}
