@@ -9,8 +9,6 @@ private:
     double total;
 
 public:
-    Pharmacy() : total(0) {}
-
     void processOrder(const string& productName, double productPrice) {
         cout << "Adding " << productName << " to the order. Price: $" << productPrice << endl;
         total += productPrice;
@@ -31,11 +29,9 @@ public:
         }
     }
     
-    
-     void printtheReceipt() {
+    void printtheReceipt() {
         cout << "------ Receipt ------" << endl;
         cout << "Product\t\tPrice" << endl;
-
         cout << "---------------------" << endl;
         cout << "Total:\t\t$" << total << endl;
     }
